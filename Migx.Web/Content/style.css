@@ -1,0 +1,56 @@
+﻿.center {
+    text-align: center;
+}
+
+.formlogin {
+    padding: 5px 5px 5px 5px;
+    display:inline-block;
+    text-align: left;
+    outline: 1px solid gray;
+}
+
+.borda {
+    outline: 1px solid gray;
+}
+
+.formDestaque {
+    font-size: 12px;
+    border-bottom: 1px solid black;
+    width:100%;
+  
+    column-span:all;
+}
+
+.linhavertical {
+    border-left: thick solid #ff0000;
+}
+.logoLogin{
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+.logoMasterPage{
+    height: 27px;
+}
+
+.espaco {
+    padding-bottom:10px;
+}
+
+.item{
+    outline: 1px solid gray;    
+}
+
+
+
+
+
+.navbar-brand>img {
+  height: 27px;
+  width: auto;
+}
+
+
+
