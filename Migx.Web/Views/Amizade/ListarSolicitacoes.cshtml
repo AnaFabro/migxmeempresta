@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Migx.Web.Models.SolicitacaoAmizadeModel>
+
+@{
+    ViewBag.Title = "ListarSolicitacoes";
+}
+
+<h2>ListarSolicitacoes</h2>
+
+<table class="table">
+    <tr>
+        <th>
+
+        </th>
+        <th>
+           Solicitado por
+        </th>
+        <th>
+           Solicitado em
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="~/Content/Images/@item.UsuarioSolicitadoPor.ID/profilePicture.jpg" onerror="this.onerror = null; this.src = '/Content/Images/PictureNotFound.jpg'" width="100" height="100" />
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioSolicitadoPor.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DtSolicitacao)
+        </td>
+        <td>
+            <button type="button" onclick="AceitarAmizade(this, @item.Id)" class="btn btn-success">Solicitar Amizade</button>
+            <button type="button" onclick="RecusarAmizade(this, @item.Id)" class="btn btn-danger">Recusar Amizade</button>
+        </td>
+    </tr>
+}
+
+</table>
+
+
+
+<script language="javascript">
+
+    function RecusarAmizade(btn, idSolicitacao) {
+        $.ajax({
+            type:'POST',
+            url: '@Url.Action("RecusarAmizade", "Amizade")',
+            data: { 'IdSolicitacao': idSolicitacao },
+            datatype: 'json',
+            traditional: true,
+            success: function(data){
+                if (data){
+                    $(btn).closest('tr').remove();
+                }
+            }
+        });
+    }
+
+    function AceitarAmizade(btn, idSolicitacao) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("AceitarAmizade", "Amizade")',
+            data: { 'IdSolicitacao': idSolicitacao },
+            datatype: 'json',
+            traditional: true,
+            success: function (data) {
+                if (data) {
+                    $(btn).closest('tr').remove();
+                }
+            }
+        });
+    }
+
+
+
+
+</script>

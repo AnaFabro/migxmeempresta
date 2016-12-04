@@ -1,0 +1,77 @@
+﻿@using Migx.Web.Models;
+@model UsuarioModel
+@{
+    ViewBag.Title = "Meus Dados";
+    List<TimeLineItemModel> listaItens = ViewData["TimeLineItens"] as List<TimeLineItemModel>;
+}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Meus Dados</h3>
+        </div>
+        <div class="panel-body">
+            <form class="" action="#">
+                <div class="col-md-4">
+                    <div class="img-rounded">
+                        <img src="~/Content/Images/@Model.ID/profilePicture.jpg" onerror="this.onerror = null; this.src = '/Content/Images/PictureNotFound.jpg'" width="120" height="100" />
+                    </div>
+                    <span class="glyphicon glyphicon-edit"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled">
+                        <li><span class="glyphicon glyphicon-edit"></span><text>@Model.Nome</text></li>
+                        <li><span class="glyphicon glyphicon-edit"></span><text>@String.Format("{0:dd/MM/yyyy}", Model.DtNascimento)</text></li>
+                        <li><span class="glyphicon glyphicon-edit"></span><text>@String.Format("{0}, {1} - {2} - {3}", Model.Endereco, Model.Complemento, Model.Cidade, Model.Estado)</text></li>
+                        <li><span class="glyphicon glyphicon-edit"></span><text>@Model.Telefone</text></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled">
+                        <li><span class="glyphicon glyphicon-edit"></span><text>@Model.Email</text></li>
+                        <li><span class="glyphicon glyphicon-edit"></span><text>************</text></li>
+                    </ul>
+                    <button type="submit" class="btn btn-default">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Meus Itens</h3>
+            <a href="@Url.Action("AdicionarItem","TimeLine")"><span class="glyphicon glyphicon-plus right"></span></a>
+
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                @foreach (var item in listaItens)
+                {
+                    <div class="col-sm-2 col-md-2">
+                        <div class="thumbnail">
+                            <div class="img-rounded center">
+                                @if (item.Fotos != null && item.Fotos.Count() > 0)
+                                {
+                                    <img src="~/Content/Images/@Model.ID/@item.Fotos[0].Id@item.Fotos[0].Extensao" width="50" height="50" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/Images/PictureNotFound.jpg" width="50" height="50" />
+                                }
+                            </div>
+                            <div class="caption">
+                                <p>@item.Descricao.PadLeft(50, ' ').Substring(0, 50)</p>
+                                <p>
+                                    @Html.ActionLink(" ", "Editar", "TimeLine", new { idTimeLine = item.Id }, new { @class = "glyphicon glyphicon-edit" })
+                                    @Html.ActionLink(" ", "Excluir", "TimeLine", new { idTimeLine = item.Id }, new { onclick = "return confirm(\'Tem certeza que deseja apagar esse item?\');", @class = "glyphicon glyphicon-remove" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

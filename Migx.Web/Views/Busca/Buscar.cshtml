@@ -1,0 +1,86 @@
+﻿@using Migx.Web.Models;
+
+@model BuscaModel
+
+@{
+    ViewBag.Title = "Buscar";
+}
+
+
+@if (Model.Usuarios.Count > 0)
+{
+    <h2>Migxs</h2>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Usuarios)
+        {
+            <tr>
+                <td>
+                    <img src="~/Content/Images/@item.ID/profilePicture.jpg" onerror="this.onerror = null; this.src = '/Content/Images/PictureNotFound.jpg'" width="100" height="100" />
+                </td>
+                <td>
+                    @item.Nome
+                </td>
+                <td>
+                    <button type="button" onclick="SolicitarAmizade(this, @item.ID)" class="btn btn-default">Solicitar Amizade</button>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+
+@if (Model.Itens.Count > 0)
+{
+    <h2>Itens</h2>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Itens)
+        {
+            <tr>
+                <td>
+                    <img src="~/Content/Images/@item.UsuarioID/@item.Fotos[0].Id@item.Fotos[0].Extensao" onerror="this.onerror = null; this.src = '/Content/Images/PictureNotFound.jpg'" width="100" height="100" />
+                </td>
+                <td>
+                    @item.Descricao
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhes", "Detalhes", "TimeLine", new { idTimeLine = item.Id }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+
+
+<script language="javascript">
+
+    function SolicitarAmizade(btn, idUsuario) {
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SolicitarAmizade", "Amizade")',
+            data: { 'IdUsuario': idUsuario },
+            datatype: 'json',
+            traditional: true,
+            success: function (data) {
+                if (data) {
+                    $(btn).removeClass('btn btn-default');
+                    $(btn).addClass('btn btn-success');
+                    $(btn).text('Amizade solicitada');
+                    $(btn).prop('disabled', true);
+                }
+            }
+        });
+    }
+</script>

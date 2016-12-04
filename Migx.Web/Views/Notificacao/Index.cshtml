@@ -1,0 +1,131 @@
+﻿@model Migx.Web.Models.NotificacoesModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.SolicitacoesAmizade.Count > 0)
+{
+    <h2>Quero ser seu (sua) Migx</h2>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.SolicitacoesAmizade)
+        {
+        <tr>
+            <td>
+                <img src="~/Content/Images/@item.UsuarioSolicitadoPorID/profilePicture.jpg" onerror="this.onerror = null; this.src = '/Content/Images/PictureNotFound.jpg'" width="100" height="100" />
+            </td>
+            <td>
+                @item.UsuarioSolicitadoPor.Nome
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtSolicitacao)
+            </td>
+            <td>
+                <button type="button" onclick="AceitarAmizade(this, @item.Id)" class="btn btn-success">Solicitar Amizade</button>
+                <button type="button" onclick="RecusarAmizade(this, @item.Id)" class="btn btn-danger">Recusar Amizade</button>
+            </td>
+        </tr>
+        }
+    </table>
+}
+
+@if (Model.SolicitacoesEmprestimos.Count > 0)
+{
+    <h2>Migx, me empresta?</h2>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.SolicitacoesEmprestimos)
+        {
+            <tr>
+                <td>
+                    <img src="~/Content/Images/@item.UsuarioIDSolicitante/profilePicture.jpg" onerror="this.onerror = null; this.src = '/Content/Images/PictureNotFound.jpg'" width="100" height="100" />
+                </td>
+                <td>
+                    @item.Item.Nome
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataSolicitacao)
+                </td>
+                <td>
+                    <button type="button" onclick="AceitarEmprestimo(this, @item.ID)" class="btn btn-success">Claro, Migx!</button>
+                    <button type="button" onclick="RecusarEmprestimo(this, @item.ID)" class="btn btn-danger">Migx, desculpas</button>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+
+
+<script language="javascript">
+
+    function RecusarAmizade(btn, idSolicitacao) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("RecusarAmizade", "Amizade")',
+            data: { 'IdSolicitacao': idSolicitacao },
+            datatype: 'json',
+            traditional: true,
+            success: function (data) {
+                if (data) {
+                    $(btn).closest('tr').remove();
+                }
+            }
+        });
+    }
+
+    function AceitarAmizade(btn, idSolicitacao) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("AceitarAmizade", "Amizade")',
+            data: { 'IdSolicitacao': idSolicitacao },
+            datatype: 'json',
+            traditional: true,
+            success: function (data) {
+                if (data) {
+                    $(btn).closest('tr').remove();
+                }
+            }
+        });
+    }
+
+    function RecusarEmprestimo(btn, idEmprestimo) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("RecusarEmprestimo", "Emprestimo")',
+            data: { 'IdEmprestimo': idEmprestimo },
+            datatype: 'json',
+            traditional: true,
+            success: function (data) {
+                if (data) {
+                    $(btn).closest('tr').remove();
+                }
+            }
+        });
+    }
+
+    function AceitarEmprestimo(btn, idEmprestimo) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("AceitarEmprestimo", "Emprestimo")',
+            data: { 'IdEmprestimo': idEmprestimo },
+            datatype: 'json',
+            traditional: true,
+            success: function (data) {
+                if (data) {
+                    $(btn).closest('tr').remove();
+                }
+            }
+        });
+    }
+
+</script>

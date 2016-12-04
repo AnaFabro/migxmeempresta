@@ -3,7 +3,7 @@
         var items = [];
         var options = '<option value="">escolha um estado</option>';
         $.each(data, function (key, val) {
-            options += '<option value="' + val.nome + '">' + val.nome + '</option>';
+            options += '<option value="' + val.sigla + '">' + val.nome + '</option>';
         });
         $("#estados").html(options);
 

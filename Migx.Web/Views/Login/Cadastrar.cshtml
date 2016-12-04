@@ -1,0 +1,130 @@
+﻿@model Migx.Web.Models.UsuarioModel
+
+@{
+    ViewBag.Title = "Migx, me empresta? - Novo usuário";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/site.css" rel="stylesheet" />
+    <link href="/Content/style.css" rel="stylesheet" />
+    <link href="/Content/css/bootstrap" rel="stylesheet" />
+
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/respond.js"></script>
+    <script src="/Scripts/cidadeEstado.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <img class="logoLogin" src="@Url.Content("~/Content/Images/logo.png")" />
+        </div>
+        <br />
+        <div class="row borda">
+            @using (Html.BeginForm("Cadastrar", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-md-6">
+                    <strong class="formDestaque">Dados pessoais</strong>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome)
+                        <div class="">
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <label class="control-label" for="inputData">Data de Nascimento</label>
+                        <input type="date" class="form-control" id="inputData" name="DtNascimento">
+                        @*<i class="form-control-feedback glyphicon glyphicon-calendar"> </i>*@
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Telefone)
+                        <div>
+                            @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Endereco)
+                        <div>
+                            @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Complemento)
+                        <div>
+                            @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Estado)
+                        <div>
+                            <select id="estados" class="form-control" name="Estado"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cidade)
+                        <div>
+                            <select id="cidades" class="form-control" name="Cidade"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <strong class="formDestaque">Dados de login</strong>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email)
+                        <div>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ConfirmaEmail)
+                        <div>
+                            @Html.EditorFor(model => model.ConfirmaEmail, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ConfirmaEmail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Senha)
+                        <div>
+                            @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ConfirmaSenha)
+                        <div>
+                            @Html.EditorFor(model => model.ConfirmaSenha, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ConfirmaSenha, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome)
+                        <div id="multiple">
+                            <input type="file" accept=".jpg" name="file" />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Cadastrar</button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

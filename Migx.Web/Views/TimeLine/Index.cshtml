@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Migx.Web.Models.TimeLineItemModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @if (item.Fotos != null && item.Fotos.Count > 0)
+                    {
+                        <img src="~/Content/Images/@item.UsuarioID/@item.Fotos[0].Id@item.Fotos[0].Extensao" width="50" height="50" />
+                    }
+                    else
+                    {
+                        <img src="/Content/Images/PictureNotFound.jpg" width="50" height="50" />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhes", "Detalhes", new { idTimeLine = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+}

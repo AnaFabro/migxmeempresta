@@ -1,0 +1,132 @@
+﻿@model Migx.Web.Models.TimeLineItemModel
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<div class="form-horizontal">
+    @using (Html.BeginForm("Editar", "TimeLine", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValorMulta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="ValorMulta" name="ValorMulta" type="text" value="@Model.ValorMulta" />
+                @*@Html.ValidationMessageFor(model => model.ValorMulta, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Adicionar Fotos</label>
+            <div class="col-md-10">
+                <input type="file" accept=".jpg" class="form-control multiple" name="files" multiple />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-md-2">Fotos</label>
+                <div class="col-md-10">
+                    @foreach (var item in Model.Fotos)
+                    {
+                        <div id="@string.Format("thumb{0}", item.Id)" class="col-sm-2 col-md-2">
+                            <div class="thumbnail">
+                                <div class="img-rounded center">
+                                    <img src="~/Content/Images/@Model.UsuarioID/@item.Id@item.Extensao" width="100" height="90" />
+                                </div>
+                                <div class="caption">
+                                    <span>@item.NomeArquivo.PadLeft(50, ' ').Substring(0, 50)</span>
+                                    <div>
+                                        <a href="javascript:void(0);" data-id="@item.Id" class="excluirFoto"><span class="glyphicon glyphicon-remove" /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-default" />
+                @if (Model.Emprestado)
+                {
+                    <button type="button" onclick="MarcarComoDevolvido(this, @Model.Id)" class="btn btn-default">Marcar como devovido</button>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Voltar", "MeusDados", "Usuario")
+            </div>
+        </div>
+
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script language="javascript">
+
+    $('.excluirFoto').click(function (e) {
+        e.preventDefault();
+        var $ctrl = $(this);
+        var idFoto = $(this).data('id');
+        if (confirm('Tem certeza que deseja apagar esse item?')) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ExcluirFoto","TimeLine")',
+                data: { 'idFoto': $(this).data('id') },
+                datatype: 'json',
+                success: function (data) {
+                    if (data) {
+                        $('#thumb' + idFoto.toString()).remove();
+                    }
+                }
+            })
+        }
+    });
+
+
+    function MarcarComoDevolvido(btn, idTimeLine) {
+        var ctrl = btn;
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Devolver", "TimeLine")',
+            data: { 'idTimeLine': idTimeLine },
+            datatype: 'json',
+            traditional: true,
+            success: function (data) {
+                if (data) {
+                    ctrl.remove();
+                }
+            }
+        });
+    }
+</script>

@@ -4,7 +4,7 @@
 
 .formlogin {
     padding: 5px 5px 5px 5px;
-    display:inline-block;
+    display: inline-block;
     text-align: left;
     outline: 1px solid gray;
 }
@@ -13,44 +13,65 @@
     outline: 1px solid gray;
 }
 
+.borda-marg {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+
+
+
 .formDestaque {
     font-size: 12px;
     border-bottom: 1px solid black;
-    width:100%;
-  
-    column-span:all;
+    width: 100%;
+    column-span: all;
 }
 
 .linhavertical {
     border-left: thick solid #ff0000;
 }
-.logoLogin{
+
+.logoLogin {
     height: 100px;
     display: block;
     margin-left: auto;
-    margin-right:auto;
+    margin-right: auto;
 }
 
-.logoMasterPage{
+.logoMasterPage {
     height: 27px;
 }
 
 .espaco {
-    padding-bottom:10px;
+    padding-bottom: 10px;
 }
 
-.item{
-    outline: 1px solid gray;    
+.item {
+    outline: 1px solid gray;
+}
+
+.button__menu {
+    color: white;
+    display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
+    position: relative; /* All 'absolute'ly positioned elements are relative to this one */
+    padding: 2px 5px; /* Add some padding so it looks nice */
+}
+
+.button__badge {
+    background-color: #fa3e3e;
+    border-radius: 2px;
+    color: white;
+    padding: 1px 3px;
+    font-size: 10px;
+    position: absolute; /* Position the badge within the relatively positioned button */
+    top: 0;
+    right: 0;
 }
 
 
 
-
-
-.navbar-brand>img {
-  height: 27px;
-  width: auto;
+.navbar-brand > img {
+    height: 27px;
+    width: auto;
 }
-
-
-

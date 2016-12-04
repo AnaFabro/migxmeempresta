@@ -1,0 +1,129 @@
+﻿@model Migx.Web.Models.TimeLineItemModel
+
+@{
+    ViewBag.Title = "Detalhes";
+
+    var JaSolicitado = ViewData["JaSolicitado"] != null;
+}
+
+<div class="col-2 col-md-2 col-sm-2">
+    <div class="borda text-center" style="height: 500px">
+        @Html.DisplayFor(model => model.Descricao)
+    </div>
+</div>
+
+<div class="col-lg-8 col-md-8 col-sm-8">
+    <div class="row">
+        <div class="img-rounded center borda">
+            @if (Model.Fotos != null && Model.Fotos.Count() > 0)
+            {
+                <img id="imagemGrande" src="~/Content/Images/@Model.UsuarioID/@Model.Fotos[0].Id@Model.Fotos[0].Extensao" onerror="this.onerror = null; this.src = '/Content/Images/PictureNotFound.jpg'" width="500" height="500" />
+            }
+            else
+            {
+                <img src="~/Content/Images/PictureNotFound.jpg" width="500" height="500" />
+            }
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:20px">
+        <div class="form-group">
+            <div class="col-md-8">
+                @foreach (var item in Model.Fotos)
+                {
+                    <div id="@string.Format("thumb{0}", item.Id)" class="col-sm-2 col-md-2">
+                        <div class="thumbnail">
+                            <div class="img-rounded center">
+                                <a href="javascript:void(0);" data-id="@item.Id" data-ext="@item.Extensao" class="atualizarImagem">
+                                    <img src="~/Content/Images/@Model.UsuarioID/@item.Id@item.Extensao" onerror="this.onerror = null; this.src = '/Content/Images/PictureNotFound.jpg'" width="100" height="90" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-2 col-md-2 col-sm-2">
+    <div class="form-group">
+        <div class="container">
+            <img src="~/Content/Images/@Model.UsuarioID/profilePicture.jpg" class="img-circle" onerror="this.onerror = null; this.src = '/Content/Images/PictureNotFound.jpg'" width="200" height="180" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <strong> @Html.DisplayFor(model => model.Usuario.Nome) </strong>
+    </div>
+
+    <div class="form-group">
+        @Html.DisplayFor(model => model.Usuario.Cidade, new { htmlAttributes = new { @class = "form-control" } }) -
+        @Html.DisplayFor(model => model.Usuario.Estado, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+
+
+    @{
+        <hr />
+        if (JaSolicitado)
+        {
+            <div class="form-group">
+                <button type="button" class="btn btn-success">Solicitado</button>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ValorMulta)
+                <div class="col-md-10">
+                    R$ @Html.DisplayFor(model => model.ValorMulta, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="DataDevolucao">Data de Devolução</label>
+                <input type="date" class="form-control" id="DataDevolucao" name="DataDevolucao">
+            </div>
+
+            <button type="button" onclick="SolicitarEmprestimo(this, @Model.Id)" class="btn btn-default">Me Empresta ?</button>
+        }
+    }
+
+</div>
+
+
+<script language="javascript">
+    function SolicitarEmprestimo(btn, idTimeLine) {
+        var dtDevolve = $("#DataDevolucao").prop('value');
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SolicitarEmprestimo", "Emprestimo")',
+            data: {
+                'idTimeLine': idTimeLine,
+                'dtDevolucao': dtDevolve
+            },
+            datatype: 'json',
+            traditional: true,
+            success: function (data) {
+                if (data) {
+                    $(btn).removeClass();
+                    $(btn).addClass('btn btn-success');
+                    $(btn).text('Solicitado');
+                    $(btn).prop('disabled', true);
+                }
+            }
+        });
+    }
+
+    $('.atualizarImagem').click(function (e) {
+        e.preventDefault();
+        var $ctrl = $(this);
+        var id = $(this).data('id');
+        var ext = $(this).data('ext');
+        var newSrc = '/Content/Images/@Model.UsuarioID/' + id + ext;
+
+        $("#imagemGrande").attr('src', newSrc);
+
+    });
+
+</script>
