@@ -1,9 +1,12 @@
 namespace Migx.Web.Migrations
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity.Migrations;
     using System.Web.Helpers;
-
+    using Migx.Web.Providers;
+    using System.Linq;
+    using Microsoft.AspNet.Identity;
     internal sealed class Configuration : DbMigrationsConfiguration<Migx.Web.Models.MigxContext>
     {
         public Configuration()
@@ -13,19 +16,7 @@ namespace Migx.Web.Migrations
 
         protected override void Seed(Migx.Web.Models.MigxContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
-            string plainPass = "1234";
+            string plainPass = "123456";
             var harPass = Crypto.HashPassword(plainPass);
 
             context.Usuarios.AddOrUpdate(
@@ -45,6 +36,14 @@ namespace Migx.Web.Migrations
                     ConfirmaEmail = "adm@migx.com.br" //Necessario pra não dar erro de validacao
                 }
                 );
+
+            if (!context.Users.Any(u => u.Email == "adm@migx.com.br"))
+            {
+                var userStore = new UserStore<AppUserIdentity>(context);
+                var userManager = new AppUserManager(userStore);
+                var userToInsert = new AppUserIdentity { UserName = "adm@migx.com.br", Email = "adm@migx.com.br" };
+                userManager.Create(userToInsert, "123456");
+            }
         }
     }
 }

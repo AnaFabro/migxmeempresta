@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
 
 namespace Migx.Web.Providers
 {
@@ -14,6 +15,11 @@ namespace Migx.Web.Providers
     {
         public AppUserManager(IUserStore<AppUserIdentity> store) : base(store)
         {
+        }
+
+        public Task<IdentityResult> Create(AppUserIdentity user, string password)
+        {
+            return base.CreateAsync(user, password);
         }
 
         // this method is called by Owin therefore best place to configure your User Manager
