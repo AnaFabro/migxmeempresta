@@ -6,7 +6,34 @@
 
 @if (Model.Count() > 0)
 {
-    <table class="table">
+    foreach (var item in Model)
+    {
+        <figure class="white">
+            <a href="@Url.Action("Detalhes", "TimeLine", new { idTimeLine = item.Id })">
+                @if (item.Fotos != null && item.Fotos.Count > 0)
+                {
+                    <img src="~/Content/Images/@item.UsuarioID/@item.Fotos[0].Id@item.Fotos[0].Extensao" />
+                }
+                else
+                {
+                    <img src="/Content/Images/PictureNotFound.jpg"/>
+                }
+                <dl>
+                    <dt>@Html.DisplayFor(modelItem => item.Nome)</dt>
+                    <dd>@Html.DisplayFor(modelItem => item.Descricao)</dd>
+                </dl>
+            </a>
+            <div id="wrapper-part-info">
+                <div class="part-info-image">
+                    @*<img src="/Content/Images/PictureNotFound.jpg" width="28" height="28" />*@
+                </div>
+                <div id="part-info">@Html.DisplayFor(modelItem => item.Nome)</div>
+            </div>
+        </figure>
+    }
+
+
+    @*<table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
@@ -34,7 +61,7 @@
                     }
                     else
                     {
-                        <img src="/Content/Images/PictureNotFound.jpg" width="50" height="50" />
+                        <img src="/Content/Images/PictureNotFound.jpg" width="28" height="28" />
                     }
                 </td>
                 <td>
@@ -42,5 +69,7 @@
                 </td>
             </tr>
         }
-    </table>
+    </table>*@
+
+
 }

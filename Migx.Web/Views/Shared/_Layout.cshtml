@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/css/bootstrap")
+
+    <link href="../../Content/font.css" rel="stylesheet" type="text/css">
+    <link href="../../Content/stylep.css" rel="stylesheet" type="text/css">
+
+
+
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+
 
 </head>
 <body>
@@ -44,12 +51,22 @@
             </div>
         </div>
     </div>
-    <div class="">
-        @RenderBody()
-    </div>
 
+    <div id="wrapper-container">
+    
+		<div class="container object">
+
+			<div id="main-container-image" style="opacity: 1;">                       
+					<section class="work">
+                        @RenderBody()
+					</section>                    
+				</div>            	    
+		</div>
+
+</div>
     @RenderSection("scripts", required: false)
 </body>
+</html>
 <script>
     $(document).ready(function () {
 
@@ -71,4 +88,5 @@
 
     });
 </script>
-</html>
+<script src="/Scripts/jquery.validate.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.js"></script>
