@@ -21,7 +21,7 @@ namespace Migx.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View((UsuarioModel)Session["oUser"]);
         }
     }
 }
