@@ -24,7 +24,7 @@ namespace Migx.Web.Migrations
                 {
                     ID = 1,
                     Nome = "Administrador",
-                    DtNascimento = DateTime.Now,
+                    DtNascimento = DateTime.Now.Date,
                     Endereco = "Endereço de teste, 1111",
                     Complemento = "Complemento de teste",
                     Cidade = "São Paulo",
