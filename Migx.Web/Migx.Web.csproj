@@ -249,6 +249,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\PictureNotFound.jpg" />
+    <Content Include="Content\Images\sativa.png" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

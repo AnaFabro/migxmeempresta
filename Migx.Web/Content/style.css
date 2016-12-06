@@ -2,11 +2,40 @@
     text-align: center;
 }
 
-.formlogin {
+/*.formlogin {
     padding: 5px 5px 5px 5px;
     display: inline-block;
     text-align: left;
     outline: 1px solid gray;
+}*/
+.login-body {
+ background: url(Images/sativa.png);
+}
+.form-box {
+    background-color: white;
+    position: relative;
+    margin-left:25%;
+    padding: 5%;
+    border: 1px solid #E7E7E7;
+    -webkit-box-shadow: 0px 3px 12px 7px rgba(230,225,230,1);
+    -moz-box-shadow: 0px 3px 12px 7px rgba(230,225,230,1);
+    box-shadow: 0px 3px 12px 7px rgba(230,225,230,1);
+}
+.form-login {
+    margin-left:7%;
+}
+.btn-login {
+    margin-top: 10%;
+    margin-bottom: 5%;
+    background-color: palevioletred;
+    color: white;
+    align-self: center;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+    color: white;
+    background-color: salmon;
+    border-color: lightgray;
 }
 
 .borda {
@@ -23,9 +52,16 @@
 
 .formDestaque {
     font-size: 12px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(235, 235, 235);
     width: 100%;
     column-span: all;
+}
+
+.btn-singin {
+    margin-top: 23%;
+    background-color:salmon;
+    color: white;
+    border-color:white;
 }
 
 .linhavertical {
@@ -74,4 +110,15 @@
 .navbar-brand > img {
     height: 27px;
     width: auto;
+}
+.singup-box {
+    background-color: white;
+    border: 1px solid lightgray;
+    -webkit-box-shadow: 0px 3px 12px 7px rgba(230,225,230,1);
+    -moz-box-shadow: 0px 3px 12px 7px rgba(230,225,230,1);
+    box-shadow: 0px 3px 12px 7px rgba(230,225,230,1);
+}
+.singup-side {
+    padding: 3% 5% 5% 5%;
+
 }

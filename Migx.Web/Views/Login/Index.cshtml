@@ -12,7 +12,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body class="login-body">
     <div class="">
         <div class="container">
             <div class="row">
@@ -20,25 +20,26 @@
             </div>
             <br />
             <div class="row">
-                <div class="span6 center">
-                    <form class="formlogin" method="post" action="@Url.Action("login","login")">
-                        <div class="espaco">
-                            <label for="inputEmail">Login</label>
-                            <input type="email" id="inputEmail"  name="email" class="form-control" placeholder="seu e-mail" required autofocus />
-                        </div>
+                <div class="">
+                    <form class="col-lg-6 form-box" method="post" action="@Url.Action("login","login")">
+                        <div class="col-lg-10 form-login">
+                            <div class="form-group">
+                                <label for="inputEmail">Login</label>
+                                <input type="email" id="inputEmail" name="email" class="form-control" required autofocus />
+                            </div>
 
-                        <div class="espaco">
-                            <label for="inputPass">Senha</label>
-                            <input type="password" id="inputPass" name="senha" class="form-control" required />
-                        </div>
+                            <div class="form-group">
+                                <label for="inputPass">Senha</label>
+                                <input type="password" id="inputPass" name="senha" class="form-control" required />
+                            </div>
 
-                        <div class="espaco">
-                            <button class="btn btn-lg btn-block" type="submit">Entrar</button>
-                        </div>
-
-                        <div class="text-center espaco">
-                            <label for="cadastrese">----- OU -----</label> <br />
-                            @Html.ActionLink("Cadastre-Se", "cadastrar", null, null)
+                            <div class="form-group pull-center">
+                                <button class="btn btn-default btn-lg btn-block btn-login" type="submit">Entrar</button>
+                            </div>
+                            <div class="text-center espaco">
+                                <span class="text-muted text-center">ou</span>
+                                @Html.ActionLink("Cadastre-se", "cadastrar", null, null)
+                            </div>
                         </div>
                     </form>
                 </div>

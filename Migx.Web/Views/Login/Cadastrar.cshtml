@@ -21,67 +21,67 @@
     <script src="/Scripts/respond.js"></script>
     <script src="/Scripts/cidadeEstado.js"></script>
 </head>
-<body>
+<body class="login-body">
     <div class="container">
         <div class="row">
             <img class="logoLogin" src="@Url.Content("~/Content/Images/logo.png")" />
         </div>
         <br />
-        <div class="row borda">
+        <div class="row singup-box">
             @using (Html.BeginForm("Cadastrar", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="col-md-6">
-                    <strong class="formDestaque">Dados pessoais</strong>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Nome)
-                        <div class="">
-                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    <div class="col-md-6 singup-side">
+                        <h3 class="formDestaque"><strong>Dados pessoais</strong></h3>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nome)
+                            <div class="">
+                                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label class="control-label" for="inputData">Data de Nascimento</label>
+                            <input type="date" class="form-control" id="inputData" name="DtNascimento">
+                            @*<i class="form-control-feedback glyphicon glyphicon-calendar"> </i>*@
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Telefone)
+                            <div>
+                                @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Endereco)
+                            <div>
+                                @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Complemento)
+                            <div>
+                                @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Estado)
+                            <div>
+                                <select id="estados" class="form-control" name="Estado"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Cidade)
+                            <div>
+                                <select id="cidades" class="form-control" name="Cidade"></select>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group has-feedback">
-                        <label class="control-label" for="inputData">Data de Nascimento</label>
-                        <input type="date" class="form-control" id="inputData" name="DtNascimento">
-                        @*<i class="form-control-feedback glyphicon glyphicon-calendar"> </i>*@
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Telefone)
-                        <div>
-                            @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Endereco)
-                        <div>
-                            @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Complemento)
-                        <div>
-                            @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Estado)
-                        <div>
-                            <select id="estados" class="form-control" name="Estado"></select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Cidade)
-                        <div>
-                            <select id="cidades" class="form-control" name="Cidade"></select>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-6">
-                    <strong class="formDestaque">Dados de login</strong>
+                <div class="col-md-6 singup-side">
+                    <h3 class="formDestaque"><strong>Dados de login</strong></h3>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Email)
                         <div>
@@ -118,7 +118,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-default">Cadastrar</button>
+                    <button type="submit" class="btn btn-default btn-lg btn-block pull-right btn-singin">Cadastrar</button>
                 </div>
             }
         </div>
