@@ -15,24 +15,23 @@
                     <div class="img-rounded">
                         <img src="~/Content/Images/@Model.ID/profilePicture.jpg" onerror="this.onerror = null; this.src = '/Content/Images/PictureNotFound.jpg'" width="120" height="100" />
                     </div>
-                    <span class="glyphicon glyphicon-edit"></span>
                 </div>
 
                 <div class="col-md-4">
                     <ul class="list-unstyled">
-                        <li><span class="glyphicon glyphicon-edit"></span><text>@Model.Nome</text></li>
-                        <li><span class="glyphicon glyphicon-edit"></span><text>@String.Format("{0:dd/MM/yyyy}", Model.DtNascimento)</text></li>
-                        <li><span class="glyphicon glyphicon-edit"></span><text>@String.Format("{0}, {1} - {2} - {3}", Model.Endereco, Model.Complemento, Model.Cidade, Model.Estado)</text></li>
-                        <li><span class="glyphicon glyphicon-edit"></span><text>@Model.Telefone</text></li>
+                        <li><text>@Model.Nome</text></li>
+                        <li><text>@String.Format("{0:dd/MM/yyyy}", Model.DtNascimento)</text></li>
+                        <li><text>@String.Format("{0}, {1} - {2} - {3}", Model.Endereco, Model.Complemento, Model.Cidade, Model.Estado)</text></li>
+                        <li><text>@Model.Telefone</text></li>
                     </ul>
                 </div>
 
                 <div class="col-md-4">
                     <ul class="list-unstyled">
-                        <li><span class="glyphicon glyphicon-edit"></span><text>@Model.Email</text></li>
-                        <li><span class="glyphicon glyphicon-edit"></span><text>************</text></li>
+                        <li><text>@Model.Email</text></li>
+                        <li><text>************</text></li>
                     </ul>
-                    <button type="submit" class="btn btn-default">Salvar</button>
+                    @Html.ActionLink("Editar", "Editar")
                 </div>
             </form>
         </div>

@@ -226,6 +226,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AmigosModel.cs" />
     <Compile Include="Models\BuscaModel.cs" />
+    <Compile Include="Models\CadastroViewModel.cs" />
     <Compile Include="Models\ChatHub.cs" />
     <Compile Include="Models\ChatModel.cs" />
     <Compile Include="Models\EmprestimoModel.cs" />
@@ -294,6 +295,7 @@
     <Content Include="Views\Emprestimo\ListarEmprestimosSolicitados.cshtml" />
     <Content Include="Views\Notificacao\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Usuario\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

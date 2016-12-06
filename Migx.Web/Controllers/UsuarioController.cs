@@ -4,14 +4,13 @@ using System.Linq;
 using System.Web.Mvc;
 using System;
 using System.Data.Entity.SqlServer;
+using System.IO;
 
 namespace Migx.Web.Controllers
 {
     public class UsuarioController : Controller
     {
-#pragma warning disable CS0169 // The field 'UsuarioController.ctx' is never used
         private MigxContext ctx;
-#pragma warning restore CS0169 // The field 'UsuarioController.ctx' is never used
 
         // GET: Usuario
         public ActionResult MeusDados()
@@ -28,8 +27,50 @@ namespace Migx.Web.Controllers
                 return RedirectToAction("index", "login");
         }
 
-        public ActionResult AtualizarCadastro(UsuarioModel user)
+        [HttpGet]
+        public ActionResult Editar()
         {
+            if (Session["oUser"] != null)
+            {
+                UsuarioModel user = (UsuarioModel)Session["oUser"];
+
+                return View(user);
+            }
+            else
+                return HttpNotFound();
+        }
+
+        [HttpPost]
+        public ActionResult Editar(UsuarioModel user)
+        {
+            var userSession = (UsuarioModel)Session["oUser"];
+
+            using (MigxContext ctx = new MigxContext())
+            {
+                var userAlterado = ctx.Usuarios.SingleOrDefault(us => us.ID == userSession.ID);
+                userAlterado.Cidade = user.Cidade;
+                userAlterado.Complemento = user.Complemento;
+                userAlterado.DtNascimento = user.DtNascimento;
+                userAlterado.Endereco = user.Endereco;
+                userAlterado.Estado = user.Estado;
+                userAlterado.Nome = user.Nome;
+                userAlterado.Telefone = user.Telefone;
+
+                ctx.SaveChanges();
+
+                Session["oUser"] = userAlterado;
+            }
+
+            if (Request.Files != null && Request.Files.Count > 0)
+            {
+                if (Request.Files[0].ContentLength > 0)
+                {
+                    var file = Request.Files[0];
+                    var novoNome = Path.Combine(Server.MapPath("~/Content/Images/"), user.ID.ToString(), "profilePicture" + ".jpg");
+                    file.SaveAs(novoNome);
+                }
+            }
+
             return View(user);
         }
 

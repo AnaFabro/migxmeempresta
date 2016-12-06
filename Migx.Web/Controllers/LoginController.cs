@@ -94,17 +94,10 @@ namespace Migx.Web.Controllers
                 //return RedirectToAction("Index", "Home");
             }
 
-
-
-
-
             using (ctx = new MigxContext())
-            {
-                
+            {                
                 var hashPass = Crypto.HashPassword(plainPass);
-
                 user.Senha = hashPass;
-                user.ConfirmaSenha = hashPass;
 
                 user = ctx.Usuarios.Add(user);
 

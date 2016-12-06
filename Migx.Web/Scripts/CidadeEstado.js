@@ -7,6 +7,12 @@
         });
         $("#estados").html(options);
 
+        try {
+            selecionarEstadoUsuario();
+        }
+        catch (err) {
+        }
+
         $("#estados").change(function () {
 
             var options_cidades = '';
@@ -24,6 +30,13 @@
                 }
             });
             $("#cidades").html(options_cidades);
+
+            try {
+                selecionarCidadeUsuario();
+            }
+            catch (err) {
+            }
+
 
         }).change();
     });

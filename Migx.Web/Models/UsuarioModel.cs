@@ -14,8 +14,8 @@ namespace Migx.Web.Models
         [StringLength(100)]
         public string Nome { get; set; }
 
-        [DataType(DataType.DateTime, ErrorMessage = "Campo data inválido")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
+        [DataType(DataType.Date, ErrorMessage = "Campo data inválido")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DtNascimento { get; set; }
 
         [StringLength(30)]
