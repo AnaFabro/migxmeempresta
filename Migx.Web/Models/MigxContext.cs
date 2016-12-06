@@ -7,9 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
+using Microsoft.AspNet.Identity.EntityFramework;
+using Migx.Web.Providers;
+
 namespace Migx.Web.Models
 {
-    public class MigxContext : DbContext
+    public class MigxContext : IdentityDbContext<AppUserIdentity>
     {
         public DbSet<UsuarioModel> Usuarios { get; set; }
         public DbSet<TimeLineItemModel> Itens { get; set; }

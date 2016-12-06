@@ -2,11 +2,19 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
 
 namespace Migx.Web.Providers
 {
     public class AuthorizeSimples : AuthorizeAttribute
     {
+
+        public override void OnAuthorization(AuthorizationContext filterContext)
+        {
+
+            base.OnAuthorization(filterContext);
+        }
+
         /// <summary>
         /// Ocorre quando o método AuthorizeCore retorna false. Redireciona para a página de login.
         /// </summary>
